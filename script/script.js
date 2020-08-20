@@ -11,11 +11,14 @@ const listShow = () => {
 	});
 }
 
-const popup = () => {
-	const openPopup = document.querySelector('.open-popup'),
-			popup = document.getElementById('free_visit_form');
+const popup = (selectorOpenPopup, idPopup, hideBtn) => {
+	const popupBtn = document.querySelector(selectorOpenPopup),
+			popup = document.getElementById(idPopup);
 	
-	openPopup.addEventListener('click', () => {
+	popupBtn.addEventListener('click', () => {
+		if (hideBtn) {
+			popupBtn.style.display = 'none';
+		}
 		popup.style.display = 'block';
 	});
 
@@ -23,9 +26,10 @@ const popup = () => {
 		const target = event.target;
 		if(target.classList.contains('close_icon') || !target.closest('.form-content')) {
 			popup.style.display = '';
-		};
+		}
 	});
 }
 
 listShow();
-popup();
+popup('.open-popup', 'free_visit_form');
+popup('.fixed-gift', 'gift', true);
