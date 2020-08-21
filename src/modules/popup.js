@@ -11,7 +11,7 @@ const popup = (selectorOpenPopup, idPopup, hideBtn) => {
 
 	popup.addEventListener('click', (event) => {
 		const target = event.target;
-		if(target.classList.contains('close_icon') || !target.closest('.form-content')) {
+		if(target.classList.contains('close_icon') || target.classList.contains('close-btn') || !target.closest('.form-content')) {
 			popup.style.display = '';
 		}
 	});
