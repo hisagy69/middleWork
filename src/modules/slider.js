@@ -1,5 +1,5 @@
 class SliderCarousel {
-	constructor({wrap, position = 0, slidesToShow = 3, infinity = false, responsive = []}) {
+	constructor({wrap, position = 0, slidesToShow = 3, infinity = false, responsive = [], button = false, controlPrev, controlNext}) {
 		this.wrap = document.querySelector(wrap);
 		this.main = this.wrap.parentNode;
 		this.slides = this.wrap.children;
@@ -9,6 +9,11 @@ class SliderCarousel {
 			widthSlides: Math.floor(100 / this.slidesToShow),
 			infinity
 		};
+		this.control = {
+			button,
+			controlPrev,
+			controlNext
+		}
 		this.responsive = responsive;
 	}
 	init() {
@@ -40,7 +45,12 @@ class SliderCarousel {
 		document.head.append(style);
 	}
 	addArrow() {
-		if (this.slides.length >= 4) {
+		if (this.controlPrev && this.controlNext) {
+			this.prev = document.querySelector(this.controlPrev);
+			this.next = document.querySelector(this.controlNext);
+			return;
+		}
+		if (this.slides.length >= 4 && this.control.button) {
 			this.prev = document.createElement('button');
 			this.next = document.createElement('button');
 			this.main.style.position = 'relative';

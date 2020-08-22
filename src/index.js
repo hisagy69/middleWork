@@ -15,7 +15,7 @@ arrowTop('clubs', 'totop');
 const slider1 = new SliderCarousel({
 	wrap: '.services-slider',
 	slidesToShow: 4,
-	control: true,
+	button: true,
 	infinity: true,
 	responsive: [{
 		breakpoint: 1024,
