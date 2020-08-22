@@ -26,5 +26,12 @@ export default (() => {
 				`;
 			}
 		});
+		window.addEventListener('resize', () => {
+			if (innerWidth > 768) {
+				menuButton.style.display = '';
+				menu.style.display = '';
+				topMenu.style.display = '';
+			}
+		});
 	}
 })();
