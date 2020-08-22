@@ -31,4 +31,10 @@ const slider1 = new SliderCarousel({
 	}]
 });
 slider1.init();
+const slider2 = new SliderCarousel({
+	wrap: '.gallery-slider',
+	slidesToShow: 1,
+	button: true
+});
+slider2.init();
 // burger();
