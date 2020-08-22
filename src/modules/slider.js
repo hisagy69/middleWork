@@ -18,8 +18,11 @@ class SliderCarousel {
 		this.responseInit();
 	}
 	addStyle() {
-		const style = document.createElement('style');
-		style.id = 'sliderCarousel-style';
+		let style = document.getElementById('sliderCarousel-style');
+		if (!style) {
+			style = document.createElement('style');
+			style.id = 'sliderCarousel-style';
+		}
 		style.textContent = `
 			.${this.main.className}{
 				overflow: hidden !important;
@@ -98,9 +101,27 @@ class SliderCarousel {
 	responseInit() {
 		if (this.responsive) {
 			const slidesToShowDefault = this.slidesToShow;
-			const allResponse = this.responsive.map(item => {
-				item.breakpoint
-			});
+			const allResponse = this.responsive.map(item => item.breakpoint);
+			const maxResponse = Math.max(...allResponse);
+
+			const checkResponse = () => {
+				const widthWindow = document.documentElement.clientWidth;
+				if (widthWindow < maxResponse) {
+					for(let i = 0; i < allResponse.length; i++) {
+						if (widthWindow < allResponse[i]) {
+							this.slidesToShow = this.responsive[i].slideToShow;
+							this.option.widthSlides = Math.floor(100 / this.slidesToShow);
+							this.addStyle();
+						}
+					}
+				} else {
+					this.slidesToShow = slidesToShowDefault;
+					this.option.widthSlides = Math.floor(100 / this.slidesToShow);
+					this.addStyle();
+				}
+			};
+			checkResponse();
+			window.addEventListener('resize', checkResponse);
 		}
 	}
 }
