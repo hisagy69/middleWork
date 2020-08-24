@@ -41,7 +41,7 @@ slider1.init();
 const slider2 = new SliderCarousel({
 	wrap: '.gallery-slider',
 	slidesToShow: 1,
-	button: true
+	button: true,
+	infinity: true
 });
 slider2.init();
-// burger();
