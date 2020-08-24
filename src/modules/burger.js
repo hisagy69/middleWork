@@ -19,7 +19,7 @@ export default (() => {
 			if (topMenu.getBoundingClientRect().top === 0){
 				topMenu.style.cssText = '';
 			}
-			if (topMenu.getBoundingClientRect().top < 0) {
+			if (topMenu.getBoundingClientRect().top < 0 && innerWidth < 768) {
 				topMenu.style.cssText = `
 					position: fixed;
 					top: 0;
@@ -30,7 +30,7 @@ export default (() => {
 			if (innerWidth > 768) {
 				menuButton.style.display = '';
 				menu.style.display = '';
-				topMenu.style.display = '';
+				topMenu.style.cssText = '';
 			}
 		});
 	}
