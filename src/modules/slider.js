@@ -22,22 +22,28 @@ class SliderCarousel {
 		this.controlSlider();
 		this.responseInit();
 	}
+	idGen() {
+		return Math.random().toString(36).substring(7);;
+	}
 	addStyle() {
 		let style = document.getElementById('sliderCarousel-style');
+		this.main.id = this.idGen();
+		this.wrap.id = this.idGen();
 		if (!style) {
 			style = document.createElement('style');
 			style.id = 'sliderCarousel-style';
 		}
 		style.textContent = `
-			.${this.main.className}{
-				overflow: hidden !important;
+			${style.textContent}
+			#${this.main.id}{
+				overflow-x: hidden !important;
 			}
-			.${this.wrap.className}{
+			#${this.wrap.id}{
 				display: flex !important;
 				transition: transform 0.5s !important;
 				will-change: transform !important;
 			}
-			.${this.slides[0].className}{
+			#${this.wrap.id} > .${this.slides[0].className}{
 				 flex: 0 0 ${this.option.widthSlides}% !important;
 				 margin: auto 0 !important;
 			}
