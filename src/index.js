@@ -5,6 +5,8 @@ import popup from './modules/popup';
 import './modules/burger';
 import scrollFunc from './modules/scrollFunc';
 import SliderCarousel from './modules/slider';
+import sendForm from './modules/sendForm';
+import Validator from './modules/validator'
 
 
 listShow();
@@ -21,6 +23,7 @@ document.querySelector('.hidden-small')
 	});
 const slider1 = new SliderCarousel({
 	wrap: '.services-slider',
+	typeTranslate: 'translate',
 	slidesToShow: 4,
 	button: true,
 	infinity: true,
@@ -40,8 +43,28 @@ const slider1 = new SliderCarousel({
 slider1.init();
 const slider2 = new SliderCarousel({
 	wrap: '.gallery-slider',
+	typeTranslate: 'show',
 	slidesToShow: 1,
 	button: true,
 	infinity: true
 });
 slider2.init();
+
+const valid = new Validator({
+	selector: '#banner-form',
+	method: {
+		'name': [
+			['notEmpty'],
+			['pattern', 'name']
+		],
+		'phone': [
+			['notEmpty'],
+			['pattern', 'phone']
+		],
+		'checkbox': [
+			['notEmpty']
+		]
+	}
+});
+valid.init();
+sendForm('banner-form');

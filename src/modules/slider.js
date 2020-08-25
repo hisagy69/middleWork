@@ -1,10 +1,11 @@
 class SliderCarousel {
-	constructor({wrap, position = 0, slidesToShow = 3, infinity = false, responsive = [], button = false, controlPrev, controlNext}) {
+	constructor({wrap, position = 0, slidesToShow = 3, infinity = false, responsive = [], button = false, controlPrev, controlNext, typeTranslate = 'show'}) {
 		this.wrap = document.querySelector(wrap);
 		this.main = this.wrap.parentNode;
 		this.slides = this.wrap.children;
 		this.slidesToShow = slidesToShow;
 		this.option = {
+			typeTranslate,
 			position,
 			widthSlides: Math.floor(100 / this.slidesToShow),
 			infinity
@@ -16,39 +17,40 @@ class SliderCarousel {
 		}
 		this.responsive = responsive;
 	}
+	idGen() {
+		return Math.random().toString(36).substring(7);
+	}
 	init() {
-		this.addStyle();
+		this.main.id = this.idGen();
+		this.wrap.id = this.idGen();
 		this.addArrow();
 		this.controlSlider();
 		this.responseInit();
 	}
-	idGen() {
-		return Math.random().toString(36).substring(7);;
-	}
 	addStyle() {
 		let style = document.getElementById('sliderCarousel-style');
-		this.main.id = this.idGen();
-		this.wrap.id = this.idGen();
 		if (!style) {
 			style = document.createElement('style');
 			style.id = 'sliderCarousel-style';
+			document.head.append(style);
 		}
-		style.textContent = `
-			${style.textContent}
-			#${this.main.id}{
-				overflow-x: hidden !important;
-			}
-			#${this.wrap.id}{
-				display: flex !important;
-				transition: transform 0.5s !important;
-				will-change: transform !important;
-			}
-			#${this.wrap.id} > .${this.slides[0].className}{
-				 flex: 0 0 ${this.option.widthSlides}% !important;
-				 margin: auto 0 !important;
-			}
-		`;
-		document.head.append(style);
+		if (this.option.typeTranslate = 'translate') {
+			style.textContent = `
+				${style.textContent}
+				#${this.main.id}{
+					overflow-x: hidden !important;
+				}
+				#${this.wrap.id}{
+					display: flex !important;
+					transition: transform 0.5s !important;
+					will-change: transform !important;
+				}
+				#${this.wrap.id} > .${this.slides[0].className}{
+					flex: 0 0 ${this.option.widthSlides}% !important;
+					margin: auto 0 !important;
+				}
+			`;
+		}
 	}
 	addArrow() {
 		if (this.controlPrev && this.controlNext) {
@@ -92,9 +94,14 @@ class SliderCarousel {
 			if (this.option.position < 0) {
 				this.option.position = this.slides.length - this.slidesToShow;
 			}
-			this.wrap.style.transform = `
-				translateX(-${this.option.position * this.option.widthSlides}%)
-			`;
+			if (this.option.typeTranslate === 'translate') {
+				this.wrap.style.transform = `
+					translateX(-${this.option.position * this.option.widthSlides}%)
+				`;
+			}
+			if (this.option.typeTranslate === 'show') {
+				this.slides[this.option.position].display = 'block';
+			}
 		}
 	}
 	nextSlider() {
@@ -103,9 +110,14 @@ class SliderCarousel {
 			if (this.option.position > this.slides.length - this.slidesToShow) {
 				this.option.position = 0;
 			}
-			this.wrap.style.transform = `
-				translateX(-${this.option.position * this.option.widthSlides}%)
-			`;
+			if (this.option.typeTranslate === 'translate') {
+				this.wrap.style.transform = `
+					translateX(-${this.option.position * this.option.widthSlides}%)
+				`;
+			}
+			if (this.option.typeTranslate === 'show') {
+				this.slides[this.option.position].display = 'block';
+			}
 		}
 	}
 	controlSlider() {
@@ -122,18 +134,22 @@ class SliderCarousel {
 
 			const checkResponse = () => {
 				const widthWindow = document.documentElement.clientWidth;
-				if (widthWindow < maxResponse) {
-					for(let i = 0; i < allResponse.length; i++) {
-						if (widthWindow < allResponse[i]) {
-							this.slidesToShow = this.responsive[i].slideToShow;
-							this.option.widthSlides = Math.floor(100 / this.slidesToShow);
-							this.addStyle();
-						}
-					}
-				} else {
-					this.slidesToShow = slidesToShowDefault;
-					this.option.widthSlides = Math.floor(100 / this.slidesToShow);
+				if (this.slidesToShow === 1) {
 					this.addStyle();
+				} else {
+					if (widthWindow < maxResponse) {
+						for(let i = 0; i < allResponse.length; i++) {
+							if (widthWindow < allResponse[i]) {
+								this.slidesToShow = this.responsive[i].slideToShow;
+								this.option.widthSlides = Math.floor(100 / this.slidesToShow);
+								this.addStyle();
+							}
+						}
+					} else {
+						this.slidesToShow = slidesToShowDefault;
+						this.option.widthSlides = Math.floor(100 / this.slidesToShow);
+						this.addStyle();
+					}
 				}
 			};
 			checkResponse();
