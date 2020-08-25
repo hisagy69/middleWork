@@ -32,15 +32,26 @@ const sendForm = (idForm) => {
 		return fetch('./server.php', {
 			method: 'POST',
 			headers: {
-				'Content-type': 'application/json'
+				'Content-Type': 'multypart/form-data'
 			},
 			body: JSON.stringify(body)
 		});
 	};
-	form.addEventListener('submit', (event) => {
-		form.insertAdjacentElement('afterend', message);
+	form.addEventListener('submit', event => {
 		event.preventDefault();
-		postData(new FormData(form))
+		const formData = new FormData(form);
+		let body = {};
+		for (let val of formData.entries()) {
+			body[val[0]] = val[1];
+		}
+		console.log(body);
+		for (let item of [...form.elements]) {
+			if (item.classList.contains('error')) {
+				return;
+			}
+		}
+		form.insertAdjacentElement('afterend', message);
+		postData(body)
 			.then(outputData)
 			.catch(errorData);
 	});
