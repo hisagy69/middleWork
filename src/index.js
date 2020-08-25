@@ -106,3 +106,18 @@ const valid3 = new Validator({
 });
 valid3.init();
 sendForm('footer_form');
+const valid4 = new Validator({
+	selector: '#card_order',
+	method: {
+		'name': [
+			['notEmpty'],
+			['pattern', 'name']
+		],
+		'phone': [
+			['notEmpty'],
+			['pattern', 'phone']
+		]
+	}
+});
+valid4.init();
+sendForm('card_order');

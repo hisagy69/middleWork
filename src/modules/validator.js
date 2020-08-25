@@ -94,8 +94,9 @@ class Validator {
 	showSuccess(item) {
 		item.classList.remove('error');
 		item.classList.add('success');
-		if (item.nextElementSibling && item.nextElementSibling.classList.contains('validator-error')) {
-			item.nextElementSibling.remove();
+		if (item.previousElementSibling && item.previousElementSibling.classList.contains('validator-error')) {
+			console.log(item.previousElementSibling);
+			item.previousElementSibling.remove();
 		}
 	}
 	applyStyle() {
