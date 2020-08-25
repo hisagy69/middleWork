@@ -10,7 +10,6 @@ class Validator {
 		this.error = new Set();
 	}
 	init() {
-		try {
 			this.applyStyle();
 			this.setPattern();
 			this.elementsForm.forEach(item => item.addEventListener('change', this.checkIt.bind(this)));
@@ -20,9 +19,6 @@ class Validator {
 					item.preventDefault();
 				}
 			});
-		} catch(error) {
-			console.log(error);
-		}
 	}
 	radioValid() {
 		for (let elem of [...this.form.elements]) {

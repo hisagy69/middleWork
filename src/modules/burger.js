@@ -1,6 +1,5 @@
 //burger
 export default (() => {
-	try {
 		const menuButton = document.querySelector('.menu-button'),
 		menu = document.querySelector('.popup-menu'),
 		topMenu = document.querySelector('.top-menu');
@@ -40,7 +39,4 @@ export default (() => {
 			}
 		});
 		menuShow();
-	} catch(error) {
-		console.log(error);
-	}
 })();

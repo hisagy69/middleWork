@@ -7,12 +7,11 @@ import scrollFunc from './modules/scrollFunc';
 import SliderCarousel from './modules/slider';
 import sendForm from './modules/sendForm';
 import Validator from './modules/validator';
-// import './modules/calc.js';
-try{popup('.open-popup', 'free_visit_form');
+import './modules/calc.js';
+popup('.open-popup', 'free_visit_form');
 popup('.fixed-gift', 'gift', true);
 popup('.callback-btn', 'callback_form');
 scrollFunc('totop', 'clubs');
-try {
 	document.querySelector('.hidden-small')
 	.addEventListener('click', (event) => {
 		event.preventDefault();
@@ -20,9 +19,6 @@ try {
 			scrollFunc(null, null, event.target.hash);
 		}
 	});
-} catch {
-	
-}
 const slider1 = new SliderCarousel({
 	wrap: '.services-slider',
 	typeTranslate: 'translate',
@@ -137,4 +133,4 @@ const valid5 = new Validator({
 	}
 });
 valid5.init();
-sendForm('card_order');} catch(error) {console.warn(error)};
+sendForm('card_order');

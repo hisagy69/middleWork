@@ -1,6 +1,5 @@
 import popup from './popup';
 const sendForm = (idForm) => {
-	try {
 		const form = document.getElementById(idForm);
 		const message = document.createElement('h4');
 		message.textContent = 'Идет отправка...';
@@ -45,6 +44,7 @@ const sendForm = (idForm) => {
 			for (let val of formData.entries()) {
 				body[val[0]] = val[1];
 			}
+			console.log(body);
 			for (let item of [...form.elements]) {
 				if (item.classList.contains('error')) {
 					return;
@@ -55,9 +55,6 @@ const sendForm = (idForm) => {
 				.then(outputData)
 				.catch(errorData);
 		});
-	} catch(error) {
-		console.log(error);
-	}
 };
 
 export default sendForm;

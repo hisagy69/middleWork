@@ -1,5 +1,4 @@
 const scrollFunc = (selectorButton, selectorShowBlock, selectorTo) => {
-	try {
 		const blockAt = document.getElementById(selectorShowBlock),
 			button = document.getElementById(selectorButton),
 			blockTo = document.querySelector(selectorTo);
@@ -51,8 +50,5 @@ const scrollFunc = (selectorButton, selectorShowBlock, selectorTo) => {
 		} else {
 			animateTo();
 		}
-	} catch(error) {
-		console.log(error);
-	}
 };
 export default scrollFunc;
