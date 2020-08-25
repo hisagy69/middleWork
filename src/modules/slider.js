@@ -21,11 +21,15 @@ class SliderCarousel {
 		return Math.random().toString(36).substring(7);
 	}
 	init() {
-		this.main.id = this.idGen();
-		this.wrap.id = this.idGen();
-		this.addArrow();
-		this.controlSlider();
-		this.responseInit();
+		try {
+			this.main.id = this.idGen();
+			this.wrap.id = this.idGen();
+			this.addArrow();
+			this.controlSlider();
+			this.responseInit();
+		} catch(error) {
+			console.log(error);
+		}
 	}
 	addStyle() {
 		let style = document.getElementById('sliderCarousel-style');

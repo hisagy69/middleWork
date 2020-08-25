@@ -1,26 +1,28 @@
 'use strict';
 
-import listShow from './modules/listShow';
+import './modules/listShow';
 import popup from './modules/popup';
 import './modules/burger';
 import scrollFunc from './modules/scrollFunc';
 import SliderCarousel from './modules/slider';
 import sendForm from './modules/sendForm';
-import Validator from './modules/validator'
-
-
-listShow();
-popup('.open-popup', 'free_visit_form');
+import Validator from './modules/validator';
+// import './modules/calc.js';
+try{popup('.open-popup', 'free_visit_form');
 popup('.fixed-gift', 'gift', true);
 popup('.callback-btn', 'callback_form');
 scrollFunc('totop', 'clubs');
-document.querySelector('.hidden-small')
+try {
+	document.querySelector('.hidden-small')
 	.addEventListener('click', (event) => {
 		event.preventDefault();
 		if (event.target.closest('a')) {
 			scrollFunc(null, null, event.target.hash);
 		}
 	});
+} catch {
+	
+}
 const slider1 = new SliderCarousel({
 	wrap: '.services-slider',
 	typeTranslate: 'translate',
@@ -121,3 +123,18 @@ const valid4 = new Validator({
 });
 valid4.init();
 sendForm('card_order');
+const valid5 = new Validator({
+	selector: '#card_order',
+	method: {
+		'name': [
+			['notEmpty'],
+			['pattern', 'name']
+		],
+		'phone': [
+			['notEmpty'],
+			['pattern', 'phone']
+		]
+	}
+});
+valid5.init();
+sendForm('card_order');} catch(error) {console.warn(error)};

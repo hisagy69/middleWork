@@ -10,15 +10,19 @@ class Validator {
 		this.error = new Set();
 	}
 	init() {
-		this.applyStyle();
-		this.setPattern();
-		this.elementsForm.forEach(item => item.addEventListener('change', this.checkIt.bind(this)));
-		this.form.addEventListener('submit', item => {
-			this.elementsForm.forEach(elem => this.checkIt({target: elem}));
-			if (this.error.size) {
-				item.preventDefault();
-			}
-		});
+		try {
+			this.applyStyle();
+			this.setPattern();
+			this.elementsForm.forEach(item => item.addEventListener('change', this.checkIt.bind(this)));
+			this.form.addEventListener('submit', item => {
+				this.elementsForm.forEach(elem => this.checkIt({target: elem}));
+				if (this.error.size) {
+					item.preventDefault();
+				}
+			});
+		} catch(error) {
+			console.log(error);
+		}
 	}
 	radioValid() {
 		for (let elem of [...this.form.elements]) {
