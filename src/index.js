@@ -95,3 +95,14 @@ const valid2 = new Validator({
 });
 valid2.init();
 sendForm('form2');
+const valid3 = new Validator({
+	selector: '#footer_form',
+	method: {
+		'phone': [
+			['notEmpty'],
+			['pattern', 'phone']
+		]
+	}
+});
+valid3.init();
+sendForm('footer_form');

@@ -5,7 +5,7 @@ class Validator {
 		this.method = method;
 		this.elementsForm = [...this.form.elements].filter(item => {
 			return	item.tagName.toLowerCase() !== 'button' && 
-			item.type !== 'button' && item.type !== 'hidden' ;
+			item.type !== 'button' && item.type !== 'hidden';
 		});
 		this.error = new Set();
 	}
@@ -20,9 +20,20 @@ class Validator {
 			}
 		});
 	}
+	radioValid() {
+		for (let elem of [...this.form.elements]) {
+			if (elem.type === 'radio' && elem.checked) {
+				return true;
+			}
+		}
+		return false;
+	}
 	isValid(item) {
 		const validatorMethod = {
 			notEmpty(item) {
+				if (item.type === 'radio') {
+					return this.radioValid();
+				}
 				if (item.value.trim() === '' || item.type === 'checkbox' && !item.checked) {
 					return false;
 				}
@@ -33,10 +44,10 @@ class Validator {
 			}
 		};
 		if (this.method) {
-			if (item.type === 'checkbox') {
-				return validatorMethod.notEmpty(item);
+			if (item.type === 'checkbox' || item.type === 'radio') {
+				return validatorMethod.notEmpty.call(this, item);
 			}
-			const reg = /name|email|phone|message|checkbox/;
+			const reg = /name|email|phone|message/;
 			const method = this.method[item.name.match(reg)[0]];
 			if (method) {
 				return method.every(elem => validatorMethod[elem[0]](item, this.pattern[elem[1]]));
@@ -73,6 +84,8 @@ class Validator {
 		'сообщение не должно быть пустым и должно написанно на русском' :
 		item.type === 'checkbox' ?
 		'необходимо согласиться на обработку персональных данных' :
+		input.type === 'radio' ?
+		'необходимо выбрать' :
 		'Ошибка в этом поле';
 		errorDiv.textContent = message;
 		errorDiv.classList.add('validator-error');
