@@ -33,8 +33,11 @@ class Validator {
 			}
 		};
 		if (this.method) {
+			if (item.type === 'checkbox') {
+				return validatorMethod.notEmpty(item);
+			}
 			const reg = /name|email|phone|message|checkbox/;
-			const method = this.method[item.name.match(reg)[0]] || item.method[item.type.match(reg)[0]];
+			const method = this.method[item.name.match(reg)[0]];
 			if (method) {
 				return method.every(elem => validatorMethod[elem[0]](item, this.pattern[elem[1]]));
 			}

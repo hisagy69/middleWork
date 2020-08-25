@@ -60,11 +60,38 @@ const valid = new Validator({
 		'phone': [
 			['notEmpty'],
 			['pattern', 'phone']
-		],
-		'checkbox': [
-			['notEmpty']
 		]
 	}
 });
 valid.init();
 sendForm('banner-form');
+const valid1 = new Validator({
+	selector: '#form1',
+	method: {
+		'name': [
+			['notEmpty'],
+			['pattern', 'name']
+		],
+		'phone': [
+			['notEmpty'],
+			['pattern', 'phone']
+		]
+	}
+});
+valid1.init();
+sendForm('form1');
+const valid2 = new Validator({
+	selector: '#form2',
+	method: {
+		'name': [
+			['notEmpty'],
+			['pattern', 'name']
+		],
+		'phone': [
+			['notEmpty'],
+			['pattern', 'phone']
+		]
+	}
+});
+valid2.init();
+sendForm('form2');
