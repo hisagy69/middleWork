@@ -105,7 +105,12 @@ class Validator {
 		}
 	}
 	applyStyle() {
-		const style = document.createElement('style');
+		let style = document.getElementById('style-valid');
+		if (style) {
+			return;
+		}
+		style = document.createElement('style');
+		style.id = 'style-valid';
 		style.textContent = `
 			input.success {
 				border: 2px solid green !important;

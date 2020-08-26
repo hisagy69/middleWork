@@ -17,7 +17,7 @@ class SliderCarousel {
 			button,
 			controlPrev,
 			controlNext
-		}
+		};
 		this.responsive = responsive;
 	}
 	idGen() {
@@ -33,28 +33,26 @@ class SliderCarousel {
 		}
 	}
 	addStyle() {
-		let style = document.getElementById('sliderCarousel-style');
-		if (!style) {
-			style = document.createElement('style');
-			style.id = 'sliderCarousel-style';
-			document.head.append(style);
+		this.main.style.overflow = 'hidden';
+		this.wrap.style.cssText = `
+			transition: transform 0.5s;
+			will-change: transform;
+		`;
+		if (this.option.typeTranslate === 'show') {
+			this.wrap.style.display = 'block';
+			[...this.slides].forEach(slide => {
+				console.log(slide);
+				slide.style.display = 'none';
+			});
 		}
-		if (this.option.typeTranslate = 'translate') {
-			style.textContent = `
-				${style.textContent}
-				#${this.main.id}{
-					overflow-x: hidden !important;
-				}
-				#${this.wrap.id}{
-					display: flex !important;
-					transition: transform 0.5s !important;
-					will-change: transform !important;
-				}
-				#${this.wrap.id} > .${this.slides[0].className}{
-					flex: 0 0 ${this.option.widthSlides}% !important;
-					margin: auto 0 !important;
-				}
-			`;
+		if (this.option.typeTranslate === 'transform') {
+			this.wrap.style.display = 'flex';
+			[...this.slides].forEach(item => {
+				item.style.cssText = `
+				flex: 0 0 ${this.option.widthSlides}% !important;
+				margin: auto 0 !important;
+				`;
+			});
 		}
 	}
 	addArrow() {
@@ -105,7 +103,7 @@ class SliderCarousel {
 				`;
 			}
 			if (this.option.typeTranslate === 'show') {
-				this.slides[this.option.position].display = 'block';
+				this.wrap.style.display = 'block';
 			}
 		}
 	}
