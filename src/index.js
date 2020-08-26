@@ -49,6 +49,28 @@ document.addEventListener('readystatechange', () => {
 		}]
 	});
 	slider1.init();
+	slider1.prev.style.cssText = `
+		position: absolute;
+		top: 25%;
+		transform: translateY(-35%);
+		left: 35px;
+		width: 40px;
+		height: 40px;
+		background: #fc0 url('images/arrow-left.png') no-repeat center;
+		border: none;
+		border-radius: 50%;
+	`;
+	slider1.next.style.cssText = `
+		position: absolute;
+		top: 25%;
+		transform: translateY(-35%);
+		right: 35px;
+		width: 40px;
+		height: 40px;
+		background: #fc0 url('images/arrow-right.png') no-repeat center;
+		border: none;
+		border-radius: 50%;
+	`;
 	const slider2 = new SliderCarousel({
 		wrap: '.gallery-slider',
 		typeTranslate: 'show',
@@ -57,7 +79,28 @@ document.addEventListener('readystatechange', () => {
 		infinity: true
 	});
 	slider2.init();
-
+	slider2.prev.style.cssText = `
+		position: absolute;
+		top: 50%;
+		transform: translateY(-35%);
+		left: 5%;
+		width: 40px;
+		height: 40px;
+		background: #fc0 url('images/arrow-left.png') no-repeat center;
+		border: none;
+		border-radius: 50%;
+	`;
+	slider2.next.style.cssText = `
+		position: absolute;
+		top: 50%;
+		transform: translateY(-35%);
+		right: 5%;
+		width: 40px;
+		height: 40px;
+		background: #fc0 url('images/arrow-right.png') no-repeat center;
+		border: none;
+		border-radius: 50%;
+	`;
 	const valid = new Validator({
 		selector: '#banner-form',
 		method: {
