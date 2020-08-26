@@ -121,6 +121,9 @@ const valid4 = new Validator({
 sendForm('card_order');
 const valid5 = new Validator({
 	selector: '#card_order',
+	pattern: {
+		promo: /^ТЕЛО2020$/
+	},
 	method: {
 		'name': [
 			['notEmpty'],
@@ -129,6 +132,9 @@ const valid5 = new Validator({
 		'phone': [
 			['notEmpty'],
 			['pattern', 'phone']
+		],
+		'promo': [
+			['pattern', 'promo']
 		]
 	}
 });

@@ -13,12 +13,12 @@ class Validator {
 		this.applyStyle();
 		this.setPattern();
 		this.elementsForm.forEach(item => item.addEventListener('change', this.checkIt.bind(this)));
-		// this.form.addEventListener('submit', item => {
-		// 	this.elementsForm.forEach(elem => this.checkIt({target: elem}));
-		// 	if (this.error.size) {
-		// 		item.preventDefault();
-		// 	}
-		// });
+		this.form.addEventListener('submit', item => {
+			this.elementsForm.forEach(elem => this.checkIt({target: elem}));
+			if (this.error.size) {
+				item.preventDefault();
+			}
+		});
 	}
 	radioValid() {
 		for (let elem of [...this.form.elements]) {
@@ -59,6 +59,9 @@ class Validator {
 	}
 	checkIt(event) {
 		const target = event.target;
+		if (target.dataset.promo) {
+			return;
+		}
 		if (this.isValid(target)) {
 			this.showSuccess(target);
 			this.error.delete(target);
