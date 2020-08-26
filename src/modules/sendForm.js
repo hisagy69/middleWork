@@ -9,11 +9,19 @@ const sendForm = idForm => {
 	const clearMessage = () => {
 		message.remove();
 		[...form.elements].forEach(item => {
-			if (item.tagName === 'input') {
+			if (item.tagName.toLowerCase() === 'input') {
 				item.value = '';
 			}
 		});
-	}
+	};
+	const clearForm = () => {
+		[...form.elements].forEach(item => {
+			if (item.matches('.success')) {
+				item.classList.remove('success');
+			}
+			item.value = '';
+		});
+	};
 	const errorData = error => {
 		console.error(error);
 		clearMessage();
@@ -22,15 +30,8 @@ const sendForm = idForm => {
 		errorPopup.querySelector('h4').textContent = 'ОШИБКА';
 		errorPopup.querySelector('p').textContent = 'Отправка не удалась, повторите еще раз!'
 		document.body.append(errorPopup);
+		clearForm();
 		popup(null, 'popup-error');
-	};
-	const clearForm = () => {
-		form.elements.forEach(item => {
-			if (item.matches('.success')) {
-				item.classList.remove('success');
-			}
-			item.value = '';
-		});
 	};
 	const outputData = response => {
 		if (response.status !== 200) {
@@ -61,6 +62,7 @@ const sendForm = idForm => {
 				return;
 			}
 		}
+		
 		form.insertAdjacentElement('afterend', message);
 		postData(body)
 			.then(outputData)
