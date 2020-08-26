@@ -1,5 +1,5 @@
 //burger
-export default (() => {
+const burger = () => {
 		const menuButton = document.querySelector('.menu-button'),
 		menu = document.querySelector('.popup-menu'),
 		topMenu = document.querySelector('.top-menu');
@@ -17,10 +17,12 @@ export default (() => {
 					}
 				});
 				window.addEventListener('scroll', () => {
-					if (topMenu.getBoundingClientRect().top === 0){
+					const menuScroll = topMenu.getBoundingClientRect().top;
+					console.log(menuScroll);
+					if (menuScroll === 0) {
 						topMenu.style.cssText = '';
 					}
-					if (topMenu.getBoundingClientRect().top < 0 && innerWidth < 768) {
+					if (menuScroll < 0 && innerWidth < 768) {
 						topMenu.style.cssText = `
 							position: fixed;
 							top: 0;
@@ -39,4 +41,5 @@ export default (() => {
 			}
 		});
 		menuShow();
-})();
+};
+export default burger;

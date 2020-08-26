@@ -1,4 +1,4 @@
-export default (() => {
+const calc = () => {
 	const appData = {
 		form: document.getElementById('card_order'),
 		priceCollection: document.querySelectorAll('[name="club-name"]'),
@@ -10,7 +10,8 @@ export default (() => {
 		month: 1,
 		price: 1990,
 		discount: 0,
-		priceTotal: document.getElementById('price-total')
+		priceTotal: document.getElementById('price-total'),
+		card: ''
 	};
 	if (!appData.form) {
 		return;
@@ -22,7 +23,7 @@ export default (() => {
 			}
 		}
 	};
-	const calc = (event) => {
+	const calc = event => {
 		const target = event.target;
 		if (target.dataset.promo) {
 			if (target.value.trim().toUpperCase() === 'ТЕЛО2020') {
@@ -31,10 +32,17 @@ export default (() => {
 			}
 		}
 		if (target.matches('input')) {
-			appData.month = checkIt(appData.monthCollection);
+			const check = checkIt(appData.monthCollection);
+			if (typeof(+check) === 'number') {
+				appData.month = check;
+			}
+			if (isNaN(check)){
+				return;
+			}
 			appData.price = appData.cardPrice[checkIt(appData.priceCollection)][appData.month];
 			appData.priceTotal.textContent = appData.price - appData.price * appData.discount;
 		}
 	};
 	appData.form.addEventListener('change', calc);
-})();
+};
+export default calc;
