@@ -29,7 +29,7 @@ class SliderCarousel {
 				clearInterval(key);
 			}
 		};
-		key = setInterval(animateSlide, 1500);
+		key = setInterval(animateSlide, 2000);
 	}
 	idGen() {
 		return Math.random().toString(36).substring(7);
@@ -54,11 +54,9 @@ class SliderCarousel {
 			`;
 			[...this.slides].forEach((slide, i) => {
 				slide.style.cssText = `
+					${slide.style.cssText}
 					transition: opacity 0.5s;
 					position: absolute;
-					left: 50%;
-					top: 50%;
-					transform: translate(-50%, -50%);
 				`;
 				if (i === this.option.position) {
 					slide.style.opacity = 1;

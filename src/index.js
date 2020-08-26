@@ -71,6 +71,14 @@ document.addEventListener('readystatechange', () => {
 		border: none;
 		border-radius: 50%;
 	`;
+	[...document.querySelectorAll('.gallery-slider > .slide')].forEach(slide => {
+		slide.style.cssText = `
+			${slide.style.cssText}
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		`;
+	});
 	const slider2 = new SliderCarousel({
 		wrap: '.gallery-slider',
 		typeTranslate: 'show',
@@ -101,6 +109,14 @@ document.addEventListener('readystatechange', () => {
 		border: none;
 		border-radius: 50%;
 	`;
+	[...document.querySelectorAll('.main-slider > .slide')].forEach(slide => {
+		slide.style.cssText = `
+			${slide.style.cssText}
+			top: 50%;
+			left: 10%;
+			transform: translate(-15%, -50%);
+		`;
+	});
 	const slider3 = new SliderCarousel({
 		wrap: '.main-slider',
 		typeTranslate: 'show',
