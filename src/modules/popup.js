@@ -4,7 +4,6 @@ const popup = (selectorOpenPopup, idPopup, hideBtn) => {
 	if (!popup) {
 		return;
 	}
-	console.log(popupBtn, popup);
 
 	if (popupBtn) {
 		popupBtn.addEventListener('click', () => {
@@ -20,7 +19,7 @@ const popup = (selectorOpenPopup, idPopup, hideBtn) => {
 		popup.style.display = 'block';
 	}
 
-	popup.addEventListener('click', (event) => {
+	popup.addEventListener('click', event => {
 		const target = event.target;
 		if(target.classList.contains('close_icon') || target.classList.contains('close-btn') || !target.closest('.form-content')) {
 			popup.style.display = '';

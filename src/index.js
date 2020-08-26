@@ -122,29 +122,8 @@ const valid4 = new Validator({
 });
 
 sendForm('card_order');
-const valid5 = new Validator({
-	selector: '#card_order',
-	pattern: {
-		promo: /^ТЕЛО2020$/
-	},
-	method: {
-		'name': [
-			['notEmpty'],
-			['pattern', 'name']
-		],
-		'phone': [
-			['notEmpty'],
-			['pattern', 'phone']
-		],
-		'promo': [
-			['pattern', 'promo']
-		]
-	}
-});
 valid.init();
 valid1.init();
 valid2.init();
 valid3.init();
 valid4.init();
-valid5.init();
-sendForm('card_order');
