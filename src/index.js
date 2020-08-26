@@ -61,7 +61,7 @@ const valid = new Validator({
 		]
 	}
 });
-valid.init();
+
 sendForm('banner-form');
 const valid1 = new Validator({
 	selector: '#form1',
@@ -76,7 +76,7 @@ const valid1 = new Validator({
 		]
 	}
 });
-valid1.init();
+
 sendForm('form1');
 const valid2 = new Validator({
 	selector: '#form2',
@@ -91,7 +91,7 @@ const valid2 = new Validator({
 		]
 	}
 });
-valid2.init();
+
 sendForm('form2');
 const valid3 = new Validator({
 	selector: '#footer_form',
@@ -102,7 +102,7 @@ const valid3 = new Validator({
 		]
 	}
 });
-valid3.init();
+
 sendForm('footer_form');
 const valid4 = new Validator({
 	selector: '#card_order',
@@ -117,7 +117,7 @@ const valid4 = new Validator({
 		]
 	}
 });
-valid4.init();
+
 sendForm('card_order');
 const valid5 = new Validator({
 	selector: '#card_order',
@@ -132,5 +132,10 @@ const valid5 = new Validator({
 		]
 	}
 });
+valid.init();
+valid1.init();
+valid2.init();
+valid3.init();
+valid4.init();
 valid5.init();
 sendForm('card_order');

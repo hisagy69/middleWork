@@ -10,15 +10,15 @@ class Validator {
 		this.error = new Set();
 	}
 	init() {
-			this.applyStyle();
-			this.setPattern();
-			this.elementsForm.forEach(item => item.addEventListener('change', this.checkIt.bind(this)));
-			this.form.addEventListener('submit', item => {
-				this.elementsForm.forEach(elem => this.checkIt({target: elem}));
-				if (this.error.size) {
-					item.preventDefault();
-				}
-			});
+		this.applyStyle();
+		this.setPattern();
+		this.elementsForm.forEach(item => item.addEventListener('change', this.checkIt.bind(this)));
+		// this.form.addEventListener('submit', item => {
+		// 	this.elementsForm.forEach(elem => this.checkIt({target: elem}));
+		// 	if (this.error.size) {
+		// 		item.preventDefault();
+		// 	}
+		// });
 	}
 	radioValid() {
 		for (let elem of [...this.form.elements]) {
@@ -70,7 +70,7 @@ class Validator {
 	showError(item) {
 		item.classList.remove('success');
 		item.classList.add('error');
-		if (item.nextElementSibling && item.nextElementSibling.classList.contains('validator-error')) {
+		if (item.previousElementSibling && item.previousElementSibling.matches('.validator-error')) {
 			return;
 		}
 		const errorDiv = document.createElement('div');
@@ -95,7 +95,6 @@ class Validator {
 		item.classList.remove('error');
 		item.classList.add('success');
 		if (item.previousElementSibling && item.previousElementSibling.classList.contains('validator-error')) {
-			console.log(item.previousElementSibling);
 			item.previousElementSibling.remove();
 		}
 	}
