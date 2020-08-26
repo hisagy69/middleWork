@@ -24,11 +24,20 @@ const sendForm = idForm => {
 		document.body.append(errorPopup);
 		popup(null, 'popup-error');
 	};
+	const clearForm = () => {
+		form.elements.forEach(item => {
+			if (item.matches('.success')) {
+				item.classList.remove('success');
+			}
+			item.value = '';
+		});
+	};
 	const outputData = response => {
 		if (response.status !== 200) {
 			throw errorData(response.status);
 		}
 		clearMessage();
+		clearForm();
 		popup(null, 'thanks');
 	};
 	const postData = body => {
