@@ -2,7 +2,8 @@ class SliderCarousel {
 	constructor({wrap, position = 0, slidesToShow = 3,
 				infinity = false, responsive = [],
 				button = false, controlPrev, controlNext,
-				typeTranslate = 'show', animate = false}) {
+				typeTranslate = 'show', animate = false,
+				pagination = false}) {
 		this.wrap = document.querySelector(wrap);
 		this.main = this.wrap.parentNode;
 		this.slides = this.wrap.children;
@@ -16,6 +17,7 @@ class SliderCarousel {
 		this.control = {
 			animate,
 			button,
+			pagination,
 			controlPrev,
 			controlNext
 		};
@@ -40,7 +42,12 @@ class SliderCarousel {
 			this.wrap.id = this.idGen();
 			this.addArrow();
 			this.controlSlider();
-			this.animateShow();
+			if (this.control.pagination) {
+				this.addPagination();
+			} 
+			if (this.control.animate && this.slides.length / this.slidesToShow > 1) {
+				this.animateShow();
+			}
 			this.responseInit();
 		}
 	}
@@ -78,6 +85,27 @@ class SliderCarousel {
 				`;
 			});
 		}
+	}
+	addPagination() {
+		const pagination = document.createElement('div'),
+				pagNum = Math.ceil(this.slides.length / this.slidesToShow);
+
+		for (let i = 0; i < pagNum; i++) {
+			pagination.insertAdjacentHTML('beforeend', `
+				<span style="width: 20px; background: #fff; height: 7px;"></span>
+			`);
+		}
+		pagination.style.cssText = `
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			position: absolute;
+			bottom: 15%;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 9;
+		`;
+		this.wrap.append(pagination);
 	}
 	addArrow() {
 		if (this.controlPrev && this.controlNext) {

@@ -1,7 +1,7 @@
 'use strict';
 import listShow from './modules/listShow';
 import popup from './modules/popup';
-import burger from'./modules/burger';
+import burger from './modules/burger';
 import scrollFunc from './modules/scrollFunc';
 import SliderCarousel from './modules/slider';
 import sendForm from './modules/sendForm';
@@ -33,6 +33,7 @@ document.addEventListener('readystatechange', () => {
 		wrap: '.services-slider',
 		typeTranslate: 'translate',
 		slidesToShow: 4,
+		animate: true,
 		button: true,
 		infinity: true,
 		responsive: [{
@@ -83,8 +84,10 @@ document.addEventListener('readystatechange', () => {
 		wrap: '.gallery-slider',
 		typeTranslate: 'show',
 		slidesToShow: 1,
+		animate: true,
 		button: true,
-		infinity: true
+		infinity: true,
+		pagination: true
 	});
 	slider2.init();
 	slider2.prev.style.cssText = `
@@ -121,6 +124,7 @@ document.addEventListener('readystatechange', () => {
 		wrap: '.main-slider',
 		typeTranslate: 'show',
 		slidesToShow: 1,
+		animate: true,
 		infinity: true
 	});
 	slider3.init();
