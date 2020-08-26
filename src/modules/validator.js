@@ -3,22 +3,25 @@ class Validator {
 		this.form = document.querySelector(selector);
 		this.pattern = pattern;
 		this.method = method;
-		this.elementsForm = [...this.form.elements].filter(item => {
-			return	item.tagName.toLowerCase() !== 'button' && 
-			item.type !== 'button' && item.type !== 'hidden';
-		});
+		this.elementsForm = null;
 		this.error = new Set();
 	}
 	init() {
-		this.applyStyle();
-		this.setPattern();
-		this.elementsForm.forEach(item => item.addEventListener('change', this.checkIt.bind(this)));
-		this.form.addEventListener('submit', item => {
-			this.elementsForm.forEach(elem => this.checkIt({target: elem}));
-			if (this.error.size) {
-				item.preventDefault();
-			}
-		});
+		if (this.form) {
+			this.elementsForm = [...this.form.elements].filter(item => {
+				return	item.tagName.toLowerCase() !== 'button' && 
+				item.type !== 'button' && item.type !== 'hidden';
+			});
+			this.applyStyle();
+			this.setPattern();
+			this.elementsForm.forEach(item => item.addEventListener('change', this.checkIt.bind(this)));
+			this.form.addEventListener('submit', item => {
+				this.elementsForm.forEach(elem => this.checkIt({target: elem}));
+				if (this.error.size) {
+					item.preventDefault();
+				}
+			});
+		}
 	}
 	radioValid() {
 		for (let elem of [...this.form.elements]) {

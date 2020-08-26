@@ -1,8 +1,8 @@
 const scrollFunc = (selectorButton, selectorShowBlock, selectorTo) => {
-		const blockAt = document.getElementById(selectorShowBlock),
-			button = document.getElementById(selectorButton),
-			blockTo = document.querySelector(selectorTo);
-			
+	const blockAt = document.getElementById(selectorShowBlock),
+		button = document.getElementById(selectorButton),
+		blockTo = document.querySelector(selectorTo);
+	if (blockAt || button || blockTo) {
 		let	scrollAt;
 
 		if (button) {
@@ -50,5 +50,8 @@ const scrollFunc = (selectorButton, selectorShowBlock, selectorTo) => {
 		} else {
 			animateTo();
 		}
+	} else {
+		return;
+	}
 };
 export default scrollFunc;

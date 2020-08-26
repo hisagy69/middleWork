@@ -12,13 +12,16 @@ popup('.open-popup', 'free_visit_form');
 popup('.fixed-gift', 'gift', true);
 popup('.callback-btn', 'callback_form');
 scrollFunc('totop', 'clubs');
-	document.querySelector('.hidden-small')
-	.addEventListener('click', (event) => {
+const hidden = document.querySelector('.hidden-small');
+
+if (hidden) {
+	hidden.addEventListener('click', event => {
 		event.preventDefault();
 		if (event.target.closest('a')) {
 			scrollFunc(null, null, event.target.hash);
 		}
 	});
+}
 const slider1 = new SliderCarousel({
 	wrap: '.services-slider',
 	typeTranslate: 'translate',

@@ -1,5 +1,8 @@
 class SliderCarousel {
-	constructor({wrap, position = 0, slidesToShow = 3, infinity = false, responsive = [], button = false, controlPrev, controlNext, typeTranslate = 'show'}) {
+	constructor({wrap, position = 0, slidesToShow = 3,
+				infinity = false, responsive = [],
+				button = false, controlPrev, controlNext,
+				typeTranslate = 'show'}) {
 		this.wrap = document.querySelector(wrap);
 		this.main = this.wrap.parentNode;
 		this.slides = this.wrap.children;
@@ -21,11 +24,13 @@ class SliderCarousel {
 		return Math.random().toString(36).substring(7);
 	}
 	init() {
+		if (this.wrap) {
 			this.main.id = this.idGen();
 			this.wrap.id = this.idGen();
 			this.addArrow();
 			this.controlSlider();
 			this.responseInit();
+		}
 	}
 	addStyle() {
 		let style = document.getElementById('sliderCarousel-style');
