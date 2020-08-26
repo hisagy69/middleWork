@@ -10,7 +10,6 @@ import calc from './modules/calc';
 
 document.addEventListener('readystatechange', () => {
 	if (document.readyState !== 'complete') {
-		console.log('ждем');
 		return;
 	}
 	listShow();

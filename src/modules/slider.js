@@ -34,23 +34,26 @@ class SliderCarousel {
 	}
 	addStyle() {
 		this.main.style.overflow = 'hidden';
-		this.wrap.style.cssText = `
-			transition: transform 0.5s;
-			will-change: transform;
-		`;
 		if (this.option.typeTranslate === 'show') {
 			this.wrap.style.display = 'block';
-			[...this.slides].forEach(slide => {
-				console.log(slide);
-				slide.style.display = 'none';
+			[...this.slides].forEach((slide, i) => {
+				if (i === this.option.position) {
+					slide.style.display = 'block';
+				} else {
+					slide.style.display = 'none';
+				}
 			});
 		}
-		if (this.option.typeTranslate === 'transform') {
+		if (this.option.typeTranslate === 'translate') {
 			this.wrap.style.display = 'flex';
-			[...this.slides].forEach(item => {
-				item.style.cssText = `
-				flex: 0 0 ${this.option.widthSlides}% !important;
-				margin: auto 0 !important;
+			this.wrap.style.cssText = `
+				transition: transform 0.5s;
+				will-change: transform;
+			`;
+			[...this.slides].forEach(slide => {
+				slide.style.cssText = `
+					flex: 0 0 ${this.option.widthSlides}% !important;
+					margin: auto 0 !important;
 				`;
 			});
 		}
