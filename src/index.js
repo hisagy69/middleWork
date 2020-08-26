@@ -101,6 +101,13 @@ document.addEventListener('readystatechange', () => {
 		border: none;
 		border-radius: 50%;
 	`;
+	const slider3 = new SliderCarousel({
+		wrap: '.main-slider',
+		typeTranslate: 'show',
+		slidesToShow: 1,
+		infinity: true
+	});
+	slider3.init();
 	const valid = new Validator({
 		selector: '#banner-form',
 		method: {
