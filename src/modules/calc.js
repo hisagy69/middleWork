@@ -12,7 +12,10 @@ export default (() => {
 		discount: 0,
 		priceTotal: document.getElementById('price-total')
 	};
-	const checkIt = (collection) => {
+	if (!appData.form) {
+		return;
+	}
+	const checkIt = collection => {
 		for (let item of collection) {
 			if (item.checked) {
 				return item.value;
