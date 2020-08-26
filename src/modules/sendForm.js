@@ -1,5 +1,5 @@
 import popup from './popup';
-const sendForm = (idForm) => {
+const sendForm = idForm => {
 	const form = document.getElementById(idForm);
 	if (!form) {
 		return;
@@ -47,7 +47,6 @@ const sendForm = (idForm) => {
 		for (let val of formData.entries()) {
 			body[val[0]] = val[1];
 		}
-		console.log(body);
 		for (let item of [...form.elements]) {
 			if (item.classList.contains('error')) {
 				return;
