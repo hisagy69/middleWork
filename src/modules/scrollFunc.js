@@ -3,12 +3,9 @@ const scrollFunc = (selectorButton, selectorShowBlock, selectorTo) => {
 		button = document.getElementById(selectorButton),
 		blockTo = document.querySelector(selectorTo);
 	if (blockAt || button || blockTo) {
-		let	scrollAt;
-
 		if (button  && blockAt) {
 			window.addEventListener('scroll', () => {
-				scrollAt = blockAt.getBoundingClientRect().bottom;
-				if (scrollAt <= 0) {
+				if (document.documentElement.scrollTop <= 0) {
 					button.style.display = 'block';
 				} else {
 					button.style.display = '';

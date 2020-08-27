@@ -33,7 +33,7 @@ document.addEventListener('readystatechange', () => {
 		wrap: '.services-slider',
 		typeTranslate: 'translate',
 		slidesToShow: 4,
-		animate: true,
+		animate: false,
 		button: true,
 		infinity: true,
 		responsive: [{
@@ -142,7 +142,6 @@ document.addEventListener('readystatechange', () => {
 		}
 	});
 
-	sendForm('banner-form');
 	const valid1 = new Validator({
 		selector: '#form1',
 		method: {
@@ -157,7 +156,6 @@ document.addEventListener('readystatechange', () => {
 		}
 	});
 
-	sendForm('form1');
 	const valid2 = new Validator({
 		selector: '#form2',
 		method: {
@@ -172,7 +170,6 @@ document.addEventListener('readystatechange', () => {
 		}
 	});
 
-	sendForm('form2');
 	const valid3 = new Validator({
 		selector: '#footer_form',
 		method: {
@@ -183,7 +180,6 @@ document.addEventListener('readystatechange', () => {
 		}
 	});
 
-	sendForm('footer_form');
 	const valid4 = new Validator({
 		selector: '#card_order',
 		method: {
@@ -198,10 +194,15 @@ document.addEventListener('readystatechange', () => {
 		}
 	});
 
-	sendForm('card_order');
 	valid.init();
 	valid1.init();
 	valid2.init();
 	valid3.init();
 	valid4.init();
+
+	sendForm('banner-form');
+	sendForm('form1');
+	sendForm('form2');
+	sendForm('footer_form');
+	sendForm('card_order');
 });

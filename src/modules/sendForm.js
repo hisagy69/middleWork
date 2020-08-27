@@ -57,8 +57,13 @@ const sendForm = idForm => {
 		for (let val of formData.entries()) {
 			body[val[0]] = val[1];
 		}
-		for (let item of [...form.elements]) {
-			if (item.classList.contains('error')) {
+
+		for (let input of [...form.elements]) {
+			if (input.dataset.promo && input.value) {
+				body.price = document.getElementById('price-total').textContent;
+				body.discount = input.dataset.promo;
+			}
+			if (input.matches('input.error')) {
 				return;
 			}
 		}
