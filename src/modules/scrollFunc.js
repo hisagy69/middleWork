@@ -3,9 +3,11 @@ const scrollFunc = (selectorButton, selectorShowBlock, selectorTo) => {
 		button = document.getElementById(selectorButton),
 		blockTo = document.querySelector(selectorTo);
 	if (blockAt || button || blockTo) {
+		let	scrollAt;
 		if (button  && blockAt) {
 			window.addEventListener('scroll', () => {
-				if (document.documentElement.scrollTop <= 0) {
+				scrollAt = blockAt.getBoundingClientRect().bottom;
+				if (scrollAt <= 0) {
 					button.style.display = 'block';
 				} else {
 					button.style.display = '';
@@ -38,7 +40,7 @@ const scrollFunc = (selectorButton, selectorShowBlock, selectorTo) => {
 				}
 			};
 			animate();
-		}
+		};
 		if (button) {
 			button.addEventListener('click', event => {
 				event.preventDefault();
