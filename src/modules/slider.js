@@ -7,6 +7,7 @@ class SliderCarousel {
 		this.wrap = document.querySelector(wrap);
 		this.main = this.wrap.parentNode;
 		this.slides = this.wrap.children;
+		this.bullets = null;
 		this.slidesToShow = slidesToShow;
 		this.option = {
 			typeTranslate,
@@ -44,7 +45,8 @@ class SliderCarousel {
 			this.controlSlider();
 			if (this.control.pagination) {
 				this.addPagination();
-			} 
+				this.bulletsChange();
+			}
 			if (this.control.animate && this.slides.length / this.slidesToShow > 1) {
 				this.animateShow();
 			}
@@ -86,13 +88,26 @@ class SliderCarousel {
 			});
 		}
 	}
+	bulletsChange() {
+		for (let i = 0; i < this.slides.length; i++) {
+			if (this.bullets[i].matches('.active') && i !== this.option.position) {
+				this.bullets[i].classList.remove('active');
+				this.bullets[i].style.background = '#fff';
+			}
+			if (i === this.option.position) {
+				this.bullets[i].classList.add('active');
+				this.bullets[i].style.background = 'rgb(255, 204, 0)';
+			}
+		}
+		this.addStyle();
+	}
 	addPagination() {
 		const pagination = document.createElement('div'),
 				pagNum = Math.ceil(this.slides.length / this.slidesToShow);
 
 		for (let i = 0; i < pagNum; i++) {
 			pagination.insertAdjacentHTML('beforeend', `
-				<span style="width: 20px; background: #fff; height: 7px;"></span>
+				<span style="width: 25px; background: #fff; height: 6px; margin: 0 4px 0; cursor: pointer;"></span>
 			`);
 		}
 		pagination.style.cssText = `
@@ -105,7 +120,23 @@ class SliderCarousel {
 			transform: translateX(-50%);
 			z-index: 9;
 		`;
-		this.wrap.append(pagination);
+		this.bullets = pagination.querySelectorAll('span');
+
+		this.main.append(pagination);
+		const slideChange = event => {
+			const target = event.target;
+			if (!target.matches('span')) {
+				return;
+			}
+			for (let i = 0; i < this.bullets.length; i++) {
+				if (this.bullets[i] === target) {
+					this.option.position = i;
+					break;
+				}
+			}
+			this.bulletsChange();
+		};
+		pagination.addEventListener('click', slideChange.bind(this));
 	}
 	addArrow() {
 		if (this.controlPrev && this.controlNext) {
@@ -161,6 +192,9 @@ class SliderCarousel {
 				prevSlide.style.opacity = 0;
 				this.slides[this.option.position].style.opacity = 1;
 			}
+			if (this.control.pagination) {
+				this.bulletsChange();
+			}
 		}
 	}
 	nextSlider() {
@@ -178,6 +212,9 @@ class SliderCarousel {
 			if (this.option.typeTranslate === 'show') {
 				prevSlide.style.opacity = 0;
 				this.slides[this.option.position].style.opacity = 1;
+			}
+			if (this.control.pagination) {
+				this.bulletsChange();
 			}
 		}
 	}
