@@ -27,8 +27,9 @@ const calc = () => {
 		const target = event.target;
 		if (target.dataset.promo) {
 			if (target.value.trim().toUpperCase() === 'ТЕЛО2020') {
-				
 				appData.discount = 0.3;
+			} else {
+				appData.discount = 0;
 			}
 		}
 		if (target.matches('input')) {
@@ -44,5 +45,6 @@ const calc = () => {
 		}
 	};
 	appData.form.addEventListener('change', calc);
+	appData.form.querySelector('[data-promo="promo"]').addEventListener('input', calc);
 };
 export default calc;
